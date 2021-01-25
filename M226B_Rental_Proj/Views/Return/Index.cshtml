@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@model HistoryModell
+<h2>History</h2>
+
+<h3>Cars</h3>
+<hr />
+<table class="table table-dark" style="background-color:lightgray; border-radius: 8px;">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">Return</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Order Order in Model.Orders.Where(n => n.Vehicle.Type == "car" && n.IsTaken == false))
+        {
+        <tr>
+            <th scope="row">@Order.ID</th>
+            <td>@Order.DateTime</td>
+            <td>@Order.Vehicle.Brand</td>
+            <td>@Order.Vehicle.Model</td>
+            <td><button>@Html.ActionLink("Return", "Return", "Return", new { id = Order.ID }, null)</button></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h3>LKW</h3>
+<hr />
+<table class="table table-dark" style="background-color:lightgray; border-radius: 8px;">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">Return</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Order Order in Model.Orders.Where(n => n.Vehicle.Type == "lkw" && n.IsTaken == false))
+        {
+        <tr>
+            <th scope="row">@Order.ID</th>
+            <td>@Order.DateTime</td>
+            <td>@Order.Vehicle.Brand</td>
+            <td>@Order.Vehicle.Model</td>
+            <td><button>@Html.ActionLink("Return", "Return", "Return", new { id = Order.ID }, null)</button></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model CarList_Model
+
+<div class="page-header">
+    <h1>Cars</h1>
+</div>
+
+<div class="container">
+    @foreach (Vehicle vehicle in Model._Vehicles)
+    {
+        <div class="row" style="background-color: lightblue; border-radius: 6px; padding: 1em;">
+            <div class="col-sm col-example">
+                <h2>@vehicle.Brand</h2>
+                <p>@vehicle.Model</p>
+                <p>@vehicle.PricePerDay</p>
+                <button>@Html.ActionLink("Rent", "Index", "Rent", new { id = vehicle.ID}, null)</button>
+            </div>
+        </div>
+        <br />
+    }
+</div>
+

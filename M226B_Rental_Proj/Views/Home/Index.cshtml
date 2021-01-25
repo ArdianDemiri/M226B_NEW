@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model AdminUser
+
+<div class="page-header">
+    <h1>Welcome</h1>
+</div>
+
+<div class="text-center" style="background-color: lightgray; padding: 3em; margin: 1em;">
+    <h3>@Html.ActionLink("Rent a Vehicle", "Index", "Vehicle")</h3>
+</div>
+
+<div class="text-center" style="background-color: lightgray; padding: 3em; margin: 1em;">
+    <h3>@Html.ActionLink("Return Vehicle", "Index", "Vehicle")</h3>
+</div>
+
+<div class="text-center" style="background-color: lightgray; padding: 3em; margin: 1em;">
+    <h3>@Html.ActionLink("History", "Index", "History")</h3>
+</div>
+
+@if (Model.IsAdmin)
+{
+    <div class="text-center" style="background-color: lightgray; padding: 3em; margin: 1em;">
+        <h3>@Html.ActionLink("AdminCenter", "Index", "AdminCenter")</h3>
+    </div>
+}

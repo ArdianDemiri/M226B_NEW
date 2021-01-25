@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="text-primary text-center">
+    AD-CENTRE
+</h3>
+<div class"row">
+    <div class="col-sm-6 text-center">
+        <label class="label label-success">Area Chart</label>
+        <div id="area-chart"></div>
+    </div>
+</div>
+
+
+@foreach (Order order in Model.CarList)
+{
+    Model.CarSumme += order.PriceVehicle;
+}
+
+@foreach (Order order in Model.LKWList)
+{
+    Model.LKWSumme += order.PriceVehicle;
+}
+
+<h1>@Model.CarSumme</h1>
+<h1>@Model.LKWSumme</h1>
+
+<div id="piechart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Vehicle', 'Monthly Income'],
+            ['LKW', @Model.CarSumme],
+            ['CAR', @Model.LKWSumme]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = { 'title': 'My Average Day', 'width': 550, 'height': 400 };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>
+
+<!--
+<div class"row">
+    <div class="col-sm-6 text-center">
+        <label class="label label-success">Line Chart</label>
+        <div id="line-chart"></div>
+    </div>
+</div>
+
+<div class"row">
+    <div class="col-sm-6 text-center">
+        <label class="label label-success">Bar Chart</label>
+        <div id="bar-chart"></div>
+    </div>
+</div>
+
+<div class"row">
+    <div class="col-sm-6 text-center">
+        <label class="label label-success">Bar stacked</label>
+        <div id="stacked"></div>
+    </div>
+</div>
+
+<div class"row">
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <label class="label label-success">Pie Chart</label>
+        <div id="pie-chart"></div>
+    </div>
+</div>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js'></script>
+<script src="./script.js"></script>
+
+<style>
+    #area-chart,
+    #line-chart,
+    #bar-chart,
+    #stacked,
+    #pie-chart {
+        min-height: 250px;
+    }
+</style>
+
+
+<script type="text/javascript">
+    var data = [
+        { y: '2014', a: 50, b: 90 },
+        { y: '2015', a: 65, b: 75 },
+        { y: '2016', a: 50, b: 50 },
+        { y: '2017', a: 75, b: 60 },
+        { y: '2018', a: 80, b: 65 },
+        { y: '2019', a: 90, b: 70 },
+        { y: '2020', a: 100, b: 75 },
+        { y: '2021', a: 115, b: 75 },
+        { y: '2022', a: 120, b: 85 },
+        { y: '2023', a: 145, b: 85 },
+        { y: '2024', a: 160, b: 95 }
+    ],
+        config = {
+            data: data,
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Total Income', 'Total Outcome'],
+            fillOpacity: 0.6,
+            hideHover: 'auto',
+            behaveLikeLine: true,
+            resize: true,
+            pointFillColors: ['#ffffff'],
+            pointStrokeColors: ['black'],
+            lineColors: ['gray', 'red']
+        };
+    config.element = 'area-chart';
+    Morris.Area(config);
+    config.element = 'line-chart';
+    Morris.Line(config);
+    config.element = 'bar-chart';
+    Morris.Bar(config);
+    config.element = 'stacked';
+    config.stacked = true;
+    Morris.Bar(config);
+    Morris.Donut({
+        element: 'pie-chart',
+        data: [
+            { label: "Friends", value: 30 },
+            { label: "Allies", value: 15 },
+            { label: "Enemies", value: 45 },
+            { label: "Neutral", value: 10 }
+        ]
+    });
+</script>
+    -->
